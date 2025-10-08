@@ -9,8 +9,20 @@ export default function Home() {
           alt="PadelMatch Sync Logo"
           className="w-40 mb-8"
           initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
+          animate={{
+            opacity: 1,
+            scale: [1, 1.05, 1],
+            filter: [
+              "drop-shadow(0 0 0px #00ffcc)",
+              "drop-shadow(0 0 12px #00ffcc)",
+              "drop-shadow(0 0 0px #00ffcc)"
+            ],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
         />
 
         <motion.h1
