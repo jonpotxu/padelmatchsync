@@ -45,7 +45,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 1 }}
         >
-          🚧 PadelMatch Sync está en construcción ...🚧
+          🚧 PadelMatch Sync está en construcción 🚧
         </motion.h1>
 
         <motion.p
