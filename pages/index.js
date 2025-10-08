@@ -40,7 +40,7 @@ export default function Home() {
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 1 }}
         >
-          Pronto podrás encontrar tu pareja de pádel ideal.
+          Estamos preparando algo increíble para los amantes del pádel.		  
         </motion.p>
       </div>
 
