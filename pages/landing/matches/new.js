@@ -3,6 +3,9 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { supabase } from "../../lib/supabaseClient";
 import { computeMatchCompetitiveness } from "../../utils/matching";
+import Page from "../../matches/new";
+export default Page;
+
 
 export default function NewMatch() {
   const router = useRouter();

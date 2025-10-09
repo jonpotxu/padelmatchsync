@@ -4,6 +4,9 @@ import { useEffect, useMemo, useState } from "react";
 import { supabase } from "../../lib/supabaseClient";
 import { averageFeedback, top2AndBottom2, specialStrokeFromProfile } from "../../utils/insights";
 import { pickNickname } from "../../utils/matching";
+import Page from "../../players/[id]";
+export default Page;
+
 
 const LABELS = {
   comms: "Comunicación",

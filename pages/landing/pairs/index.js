@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabaseClient";
 import { pairFromPlayers } from "../../utils/matching";
+import Page from "../../pairs";
+export default Page;
 
 export default function Pairs() {
   const [players, setPlayers] = useState([]);

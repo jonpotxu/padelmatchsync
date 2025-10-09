@@ -1,50 +1,63 @@
-import { motion } from "framer-motion";
+// pages/landing/index.js
+import Link from "next/link";
+import SiteLayout from "../../components/SiteLayout";
 
 export default function Landing() {
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-gray-900 to-black text-white">
-      {/* Header */}
-      <header className="flex justify-between items-center px-8 py-6 border-b border-white/10">
-        <img src="/logo.svg" alt="PadelMatch Sync" className="w-28" />
-        <nav className="space-x-6 text-sm font-medium">
-          <a href="#features" className="hover:text-emerald-400">Características</a>
-          <a href="#about" className="hover:text-emerald-400">Sobre nosotros</a>
-          <a href="#contact" className="hover:text-emerald-400">Contacto</a>
-        </nav>
-      </header>
+    <SiteLayout>
+      {/* HERO */}
+      <section className="py-12 md:py-20 text-center">
+        <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
+          Encuentra tu <span className="text-emerald-400">pareja ideal</span> de pádel
+          <br className="hidden md:block" /> y partidos equilibrados
+        </h1>
+        <p className="mt-4 text-gray-300 max-w-2xl mx-auto">
+          Calibración visual del nivel · Emparejamiento inteligente · Partidos amistosos o competitivos ·
+          Handoff a Playtomic para reservar pista.
+        </p>
+        <div className="mt-8 flex items-center justify-center gap-3">
+          <Link href="/landing/formulario" className="px-5 py-3 rounded-2xl bg-emerald-500 text-black font-semibold">
+            Regístrate gratis
+          </Link>
+          <Link href="/landing/caracteristicas" className="px-5 py-3 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10">
+            Ver características
+          </Link>
+        </div>
 
-      {/* Hero section */}
-      <main className="flex-grow flex flex-col justify-center items-center text-center px-6">
-        <motion.h1
-          className="text-4xl md:text-6xl font-bold mb-6"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          Encuentra tu pareja de pádel ideal 🎾
-        </motion.h1>
-        <motion.p
-          className="text-lg md:text-xl text-gray-400 max-w-2xl"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 1 }}
-        >
-          Conecta con jugadores de tu nivel, forma parejas compatibles y disfruta del juego sin complicaciones.
-        </motion.p>
-        <motion.a
-          href="#registro"
-          className="mt-10 px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-black font-semibold rounded-2xl shadow-lg transition"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Regístrate gratis
-        </motion.a>
-      </main>
+        <div className="mt-6 flex flex-wrap justify-center gap-2 text-xs text-gray-400">
+          <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10">Partner matching</span>
+          <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10">Pair vs Pair</span>
+          <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10">Feedback post-partido</span>
+          <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10">Ficha técnica y mote</span>
+        </div>
+      </section>
 
-      {/* Footer */}
-      <footer className="py-6 text-center text-sm text-gray-500 border-t border-white/10">
-        © 2025 PadelMatch Sync — Tu compañero ideal de pádel
-      </footer>
-    </div>
+      {/* TRES BLOQUES */}
+      <section className="grid md:grid-cols-3 gap-6 mt-8">
+        {[
+          { title: "Emparejamiento preciso", desc: "Nivel, actitud y disponibilidad para encontrar compañero y rivales compatibles." },
+          { title: "Partidos a tu medida", desc: "Elige amistoso o competitivo y te proponemos los mejores cruces." },
+          { title: "Mejora continua", desc: "Feedback rápido para detectar fortalezas y áreas de mejora." },
+        ].map((c) => (
+          <div key={c.title} className="rounded-2xl p-6 bg-white/5 border border-white/10">
+            <h3 className="text-lg font-semibold mb-1">{c.title}</h3>
+            <p className="text-gray-300 text-sm">{c.desc}</p>
+          </div>
+        ))}
+      </section>
+
+      {/* CTA FINAL */}
+      <section className="mt-12 text-center">
+        <p className="text-gray-300">¿Listo para jugar mejor y más a menudo?</p>
+        <div className="mt-4 flex items-center justify-center gap-3">
+          <Link href="/landing/formulario" className="px-5 py-3 rounded-2xl bg-emerald-500 text-black font-semibold">
+            Crear perfil y buscar pareja
+          </Link>
+          <Link href="/landing/matches/find" className="px-5 py-3 rounded-2xl border border-white/15 bg-white/5">
+            Buscar rivales ahora
+          </Link>
+        </div>
+      </section>
+    </SiteLayout>
   );
 }
