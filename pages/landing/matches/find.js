@@ -2,8 +2,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "../../lib/supabaseClient";
 import { findMatchesForPair } from "../../utils/matching";
-import Page from "../../matches/find";
-export default Page;
+
 
 export default function FindMatches() {
   const [mode, setMode] = useState("competitive");
