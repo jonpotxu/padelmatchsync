@@ -4,9 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import { supabase } from "../../lib/supabaseClient";
 import { averageFeedback, top2AndBottom2, specialStrokeFromProfile } from "../../utils/insights";
 import { pickNickname } from "../../utils/matching";
-import Page from "../../players/[id]";
-export default Page;
-
 
 const LABELS = {
   comms: "Comunicación",
@@ -29,7 +26,7 @@ export default function PlayerCard() {
   useEffect(() => {
     if (!id) return;
     (async () => {
-      // 1) Cargar jugador
+      // 1) Jugador
       const { data: pData, error: pErr } = await supabase
         .from("players")
         .select("*")
@@ -50,7 +47,7 @@ export default function PlayerCard() {
         .order("created_at", { ascending: false });
       setFeedback(Array.isArray(fData) ? fData : []);
 
-      // 3) (Opcional) Agregado
+      // 3) Agregado (si existe la vista)
       const { data: aRows } = await supabase
         .from("player_feedback_agg")
         .select("*")
@@ -60,10 +57,10 @@ export default function PlayerCard() {
     })();
   }, [id]);
 
-  // URL del perfil para compartir
+  // URL para compartir (con prefijo /landing)
   const shareUrl = useMemo(() => {
     if (typeof window === "undefined" || !id) return "";
-    return `${window.location.origin}/players/${id}`;
+    return `${window.location.origin}/landing/players/${id}`;
   }, [id]);
 
   const copyLink = async () => {
@@ -72,7 +69,6 @@ export default function PlayerCard() {
       if (navigator?.clipboard?.writeText) {
         await navigator.clipboard.writeText(shareUrl);
       } else {
-        // Fallback: crea un input temporal
         const el = document.createElement("input");
         el.value = shareUrl;
         document.body.appendChild(el);
@@ -96,7 +92,7 @@ export default function PlayerCard() {
     );
   }
 
-  // Cálculos (usa vista agg si existe; si no, cálculo local)
+  // Cálculos
   const local = averageFeedback(feedback);
   const averages = agg
     ? {
@@ -127,7 +123,6 @@ export default function PlayerCard() {
               {player.city || "—"} · Nivel {Number(player.level || 5).toFixed(1)} · {player.position}
             </p>
           </div>
-
           <div className="flex items-center gap-2">
             <button
               onClick={copyLink}
@@ -136,9 +131,7 @@ export default function PlayerCard() {
             >
               Copiar enlace
             </button>
-            {copied && (
-              <span className="text-sm text-emerald-300">¡Copiado!</span>
-            )}
+            {copied && <span className="text-sm text-emerald-300">¡Copiado!</span>}
           </div>
         </div>
 
