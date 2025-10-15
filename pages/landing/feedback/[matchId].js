@@ -2,9 +2,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "../../lib/supabaseClient";
-import Page from "../../feedback/[matchId]";
-export default Page;
-
 
 const FIELDS = [
   { key: "comms", label: "Comunicación" },
@@ -28,7 +25,6 @@ export default function FeedbackMatch() {
   useEffect(() => {
     if (!matchId) return;
     (async () => {
-      // MVP: carga de todos los jugadores (si ya hiciste el filtro de 4, sustituye por tu useEffect filtrado)
       const { data, error } = await supabase
         .from("players")
         .select("id,name,level")
@@ -37,10 +33,7 @@ export default function FeedbackMatch() {
     })();
   }, [matchId]);
 
-  const hasAnyScore = useMemo(() => {
-    return Object.values(scores).some(Boolean);
-  }, [scores]);
-
+  const hasAnyScore = useMemo(() => Object.values(scores).some(Boolean), [scores]);
   const canSubmit = !!about && hasAnyScore;
 
   const saveFeedback = async () => {
@@ -58,11 +51,7 @@ export default function FeedbackMatch() {
     };
     const { error } = await supabase.from("feedback").insert([payload]);
     if (error) setMsg("❌ " + error.message);
-    else {
-      setMsg("✅ Feedback enviado. ¡Gracias!");
-      // Limpieza opcional
-      // setAbout(""); setFromPlayer(""); setScores({}); setNotes("");
-    }
+    else setMsg("✅ Feedback enviado. ¡Gracias!");
   };
 
   const StarRow = ({ field }) => (
@@ -153,3 +142,4 @@ export default function FeedbackMatch() {
     </div>
   );
 }
+
